@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding : 30px;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
+    Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  header{
+      border-bottom : solid 0.1px rgba(121, 121, 121, 0.384);
+      padding-bottom: 10px;
+  }
+
+  #searchBar{
+      height: 40px;
+      width: 200px;
+  }
+
+  #signUp, #Login{
+    border: solid 0.1px rgba(121, 121, 121, 0.384);
+    border-radius: 12px;
+    width: 110px;
+    margin-right: 10px;
+  }
+
+  #signUp:hover{
+    border: solid 0.1px rgb(28, 28, 225);
+    color : rgb(28, 28, 225);
+  }
+  #Login:hover{
+    border: solid 0.1px rgb(100, 32, 225);
+    color : rgb(100, 32, 225);
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  h1{
+    font-size : 52px;
+    font-weight: 700;
+    color : rgb(51, 51, 51);
+  }
+
+  h2{
+    font-size: 24px;
+    color: rgb(102, 102, 102);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  button{
+    font-size: 20px;
+    border : none;
+    color : rgba(0, 0, 0, 0.726);
+    background: none;
+    height: 50px;
+    width: 120px;
+  }
+  
+  button:hover{
+    cursor: pointer;
+    color : black;
+  }
+
+  #createCV{
+      background-color: rgb(28, 28, 225);
+      border-radius: 12px;
+      color : white;
+      width: 200px;
+  }
+
+  #createCV:Hover{
+      box-shadow: rgb(210, 210, 249) 4px 4px 0px 0px;
+    }
+
+  .NavBar{
+      display: flex;
+      justify-content: space-evenly;
+  }
+  .fieldFocus{
+      border-bottom: solid 2px #2188ff;
+      color : black;
+  }
+
+  #Preview{
+    background-color: rgb(100, 32, 225);
+    border-radius: 12px;
+    color : white;
+    width: 110px;
+  }
+
+  #Preview:hover{
+    box-shadow: rgb(210, 210, 249) 4px 4px 0px 0px;
+  }
+
+  #InputFields{
+      height : 600px;
+  }
+
+  input{
+      margin: 5px;
+      padding-left: 15px;
+      font-size: 25px;
+      width : 400px;
+      height : 50px;
+      border-radius: 8px;
+      border : solid 0.1px rgba(0, 0, 0, 0.384); 
+  }
+
+  input:focus {outline:0;}
+
+  .footerLink{
+    margin : 5px;
+  }
+
+  footer{
+      padding: 10px;
+      border-top : solid 0.1px rgba(121, 121, 121, 0.384);
+      font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
