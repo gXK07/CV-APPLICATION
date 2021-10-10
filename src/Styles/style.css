@@ -1,24 +1,51 @@
 body {
     margin: 0;
-    padding : 30px;
     font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
     Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .App-logo {
+    height: 5vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 5s linear;
+    }
+  }
+  
+  .App{
+    min-height: 100vh;
+    margin : 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   header{
       border-bottom : solid 0.1px rgba(121, 121, 121, 0.384);
       padding-bottom: 10px;
   }
 
   #searchBar{
+    border: solid 0.1px rgba(121, 121, 121, 0.384);
       height: 40px;
       width: 200px;
   }
 
   #signUp, #Login{
     border: solid 0.1px rgba(121, 121, 121, 0.384);
+    height: 40px;
     border-radius: 12px;
     width: 110px;
     margin-right: 10px;
@@ -39,8 +66,9 @@ body {
   }
 
   h1{
+    font-family: "Alliance No.1",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size : 52px;
-    font-weight: 700;
+    font-weight: 800;
     color : rgb(51, 51, 51);
   }
 
@@ -81,7 +109,7 @@ body {
       justify-content: space-evenly;
   }
   .fieldFocus{
-      border-bottom: solid 2px #2188ff;
+      border-bottom: solid 2px #81e5fb;
       color : black;
   }
 
@@ -92,12 +120,19 @@ body {
     width: 110px;
   }
 
-  #Preview:hover{
+  #Download{
+    background-color: rgb(28, 28, 225);
+    border-radius: 12px;
+    color : white;
+    width: 110px;
+  }
+
+  #Preview:hover, #Download:hover{
     box-shadow: rgb(210, 210, 249) 4px 4px 0px 0px;
   }
 
   #InputFields{
-      height : 600px;
+      transform: translate(0px, 20px);
   }
 
   input{
@@ -110,6 +145,15 @@ body {
       border : solid 0.1px rgba(0, 0, 0, 0.384); 
   }
 
+  #CV{
+    height: 636px;
+    width : 450px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.384) 0px 0px 15px 4px;
+    position : absolute;
+    transform: translate(490px, -300px);
+  }
+
   input:focus {outline:0;}
 
   .footerLink{
@@ -117,6 +161,7 @@ body {
   }
 
   footer{
+      margin-top: auto;
       padding: 10px;
       border-top : solid 0.1px rgba(121, 121, 121, 0.384);
       font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
