@@ -3,14 +3,18 @@ import check from "../Images/check.png"
 import plus from '../Images/Plus.png'
 
 
-const InfoPers = (props) => {
-    console.log(props.etat)
-    if(props.etat){
+class InfoPers extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {}
+    };
+    render(){
+    if(this.props.etat){
         return <img src={check} alt="check"></img>
     }
     else{
     return <div className="InfoPers">
-        <form id="InfoPers" onSubmit={props.save}>
+        <form id="InfoPers" onSubmit={this.props.save}>
             <input placeholder ='Nom : Dupont'></input>
             <input placeholder ='Prenom : Julien'></input>
             <input placeholder ='Âge : 23 ans'></input>
@@ -23,11 +27,42 @@ const InfoPers = (props) => {
     </div>
     }
 }
-const Formation = (props) => {
+}
+
+class Formation extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            top : ""
+        }
+    }
+    // Sortir pour qu'on puisse le déclancher quand on clique sur "Formation" + quand on clique sur "+"
+    // comme ca, ca résout le pb d'affichage manquant 
+    addTop = (array_Obj) => {
+        let to_Display = [];
+        let arrayDivForma = []
+        // On boucle sur les objets "Formation", "array_Obj.length" = nombre de formations
+        for (let i=0; i<array_Obj.length; i++){
+            // On boucle sur les props de chaque formation "p" = {etablissemnt, titre, année}
+            let divForma = "Formation" + `${i + 1}`;
+            for(let p in array_Obj[i]){
+                divForma = divForma + " || " + array_Obj[i][p];
+            }
+            arrayDivForma.push(divForma)
+        }
+        to_Display = arrayDivForma.map(x => <div className="forma">{x}</div>);
+        this.setState({
+            top : to_Display
+        });
+    }
+    render(){
     return (
         <div>
-        <div>{props.data}</div>
-        <form id="Formation" onSubmit={(e) => {props.add(e, "Formation")}}>
+        <div>{this.state.top}</div>
+        <form id="Formation" onSubmit={(e) => {
+            this.props.add(e, "Formation");
+            this.addTop(this.props.data);
+        }}>
             <input placeholder ='Etablissement'></input>
             <input placeholder ='Titre'></input>
             <input placeholder ='Année'></input>
@@ -37,12 +72,12 @@ const Formation = (props) => {
     </form>
     </div>
     )
+    }
 }
 const Exp = (props) => {
     
     return (
     <div>
-    <div>{props.data}</div>
     <form id="Exp" onSubmit={(e) => {props.add(e, "ExpPro")}}>
             <input placeholder ='Entreprise'></input>
             <input placeholder ='Poste'></input>
@@ -67,10 +102,8 @@ const About = (props) => {
     }
 }
 const Competences = (props) => {
-    console.log(props);
     return (
     <div>
-    <div>-----------</div>
     <form id="Competences" onSubmit={(e) => {props.add(e, "Competences")}}>
         <input placeholder ='Compétence'></input>
         <button type="submit">

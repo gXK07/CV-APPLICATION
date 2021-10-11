@@ -120,6 +120,12 @@ body {
     width: 110px;
   }
 
+  .CVchild{
+    /* display : flex;
+    height: 125px; */
+    border-bottom: solid 0.1px black;
+  }
+
   #Download{
     background-color: rgb(28, 28, 225);
     border-radius: 12px;
@@ -158,6 +164,10 @@ body {
 
   .footerLink{
     margin : 5px;
+  }
+
+  .forma{
+    border : solid black 0.1px
   }
 
   footer{

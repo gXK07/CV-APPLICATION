@@ -122,9 +122,9 @@ class Builder extends React.Component {
             data : {
                 InfoPerso : data,
                 Formation : this.state.data.Formation,
-                ExpPro : this.state.data.Formation,
-                Apropos : this.state.data.Formation,
-                Competences : this.state.data.Formation,
+                ExpPro : this.state.data.ExpPro,
+                Apropos : this.state.data.Apropos,
+                Competences : this.state.data.Competences,
             }
         })
         console.log(this.state)
