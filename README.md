@@ -1,1 +1,1 @@
-Mon Premier project avec React. Un générateur de CV.
+Mon premier project avec React. Un générateur de CV.
