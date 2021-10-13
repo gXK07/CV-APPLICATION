@@ -65,8 +65,6 @@ const Competences = (props) => {
 
 
 const CV = (props) => {
-    //il aime pas que je lui envoi des obj plutot que des chaine de caractère donc
-    // faut que je traite les données avant de les afficher.
     return <div id="CV">
         <InfoPerso data={props.data.InfoPerso}/>
         <Formation data={props.data.Formation}/>

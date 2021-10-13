@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputFields from "./InputFields";
 import CV from "../CV/CV.js"
 import cross from "../Images/delete.png"
@@ -14,176 +14,165 @@ import newObj from "./Factory";
 // this.state.data est envoyé dans preview quand on le demande et on affiche une fenetre
 // avec la data. download, déclanche une fentre qui permet de telecharger le doc fini.
 
-class Builder extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            field : {
-                wich : "InfoPerso",
-                etat : {
-                    InfoPerso : false,
-                    Formation : [],
-                    ExpPro : [],
-                    Apropos : false,
-                    Competences : [],
-                }
-            },
-            preview : undefined,
-            class : {
-                InfoPerso : "fieldFocus",
-                Formation : "",
-                ExpPro : "",
-                Apropos : "",
-                Competences : "",
-            },
-            data : {
-                InfoPerso : [],
+const Builder = () => {
+       const [field, setfield] = useState({
+            wich : "InfoPerso",
+            etat : {
+                InfoPerso : false,
                 Formation : [],
                 ExpPro : [],
-                Apropos : [],
+                Apropos : false,
                 Competences : [],
-            },
-        }
-    }
-
-    changeFocus = (obj, id, toAdd) => {
-        for (let Prp in obj){
-            if(Prp === id){
-                obj[Prp] = toAdd;
             }
-            else {
-                obj[Prp] = "";
+        });
+        const [preview, setpreview] = useState(undefined);
+        const [Class, setClass] = useState({
+            InfoPerso : "fieldFocus",
+            Formation : "",
+            ExpPro : "",
+            Apropos : "",
+            Competences : "",
+        });
+        const [data, setdata] = useState({
+            InfoPerso : [],
+            Formation : [],
+            ExpPro : [],
+            Apropos : [],
+            Competences : [],
+        });
+
+        const changeFocus = (obj, id, toAdd) => {
+            for (let Prp in obj){
+                if(Prp === id){
+                    obj[Prp] = toAdd;
+                }
+                else {
+                    obj[Prp] = "";
+                }
             }
+            return obj
         }
-        return obj
-    }
 
-    Select = (e) => {
-        const toDisplay = e.target.id
-        this.setState({
-            field : {
-                wich : toDisplay,
-                etat : this.state.field.etat
-            },
-            class : this.changeFocus(this.state.class, e.target.id, "fieldFocus")
-        })
-    }
-
-    add =(e, field) => {
-        e.preventDefault();
-        let to_push = newObj(field);
-        let count = 0;
-        for(let p in to_push){
-            to_push[p] = e.target[count].value;
-            count++;
-        }
-        let obj = this.state.data;
-        for (let Prp in obj){
-            if(Prp === field){
-                obj[Prp].push(to_push);
-            }
-        }
-        console.log("new state.data : ", obj);
-    }
-
-    Preview = () => {
-        const Delete = () => {
-            this.setState({
-                preview : undefined
+        const Select = (e) => {
+            const toDisplay = e.target.id
+            setfield({
+                    wich : toDisplay,
+                    etat : field.etat
             })
+            setClass(changeFocus(Class, e.target.id, "fieldFocus"))
         }
-            this.setState({
-                preview : <div>
-                    <CV data={this.state.data}/>
+
+        const add =(e, field) => {
+            e.preventDefault();
+            let to_push = newObj(field);
+            let count = 0;
+            for(let p in to_push){
+                to_push[p] = e.target[count].value;
+                count++;
+            }
+            let obj = data;
+            for (let Prp in obj){
+                if(Prp === field){
+                    obj[Prp].push(to_push);
+                }
+            }
+            console.log("new state.data : ", obj);
+        }
+
+        const Preview = () => {
+            const Delete = () => {
+                setpreview(undefined)
+            }
+            setpreview(
+                <div>
+                    <CV data={data}/>
                     <button onClick= {Delete} id="delete">
                         <img src={cross} alt="delete"></img>
                     </button>
-                    </div>,
-            })
-    }
-
-    save = (e) => {
-        e.preventDefault()
-        let data = []
-        for(let i =0; i<7; i++){
-        data.push(e.target[i].value)
+                </div>
+            )
         }
-        this.setState({
-            field : {
-                wich : this.state.field.wich,
+
+
+
+        const save = (e) => {
+            e.preventDefault()
+            let newData = []
+            for(let i =0; i<7; i++){
+            newData.push(e.target[i].value)
+            }
+            setfield({
+                wich : field.wich,
                 etat : {
                     InfoPerso : true,
-                    Formation : this.state.field.etat.Formation,
-                    ExpPro : this.state.field.etat.ExpPro,
-                    Apropos : this.state.field.etat.Apropos,
-                    Competences : this.state.field.etat.Competences,
+                    Formation : field.etat.Formation,
+                    ExpPro : field.etat.ExpPro,
+                    Apropos : field.etat.Apropos,
+                    Competences : field.etat.Competences,
                 }
-            },
-            data : {
-                InfoPerso : data,
-                Formation : this.state.data.Formation,
-                ExpPro : this.state.data.ExpPro,
-                Apropos : this.state.data.Apropos,
-                Competences : this.state.data.Competences,
-            }
-        })
-        console.log(this.state)
-        e.target.reset();
-    }
+            })
+            setdata({
+                InfoPerso : newData,
+                Formation : data.Formation,
+                ExpPro : data.ExpPro,
+                Apropos : data.Apropos,
+                Competences : data.Competences,
+            })
+            e.target.reset();
+        }
 
-    saveAbout = (e) => {
-        e.preventDefault();
-        console.log(e.target[0].value)
-        this.setState({
-            field : {
-                wich : this.state.field.wich,
+        const saveAbout = (e) => {
+            e.preventDefault();
+            setfield({
+                wich : field.wich,
                 etat : {
-                    InfoPerso : this.state.field.etat.InfoPerso,
-                    Formation : this.state.field.etat.Formation,
-                    ExpPro : this.state.field.etat.ExpPro,
+                    InfoPerso : field.etat.InfoPerso,
+                    Formation : field.etat.Formation,
+                    ExpPro : field.etat.ExpPro,
                     Apropos : true,
-                    Competences : this.state.field.etat.Competences,
+                    Competences : field.etat.Competences,
                 }
-            },
-            data : {
-                InfoPerso : this.state.data.InfoPerso,
-                Formation : this.state.data.Formation,
-                ExpPro : this.state.data.ExpPro,
+            })
+            setdata({
+                InfoPerso : data.InfoPerso,
+                Formation : data.Formation,
+                ExpPro : data.ExpPro,
                 Apropos : e.target[0].value,
-                Competences : this.state.data.Competences,
-            }
-        })
-    }
-
-    render(){
-    return <div className ="Builder">
-        {this.state.preview}
-        <div className ="NavBar">
-        <button className = {this.state.class.InfoPerso} id="InfoPerso" onClick={this.Select}>
-            Infomations
-        </button>
-        <button className = {this.state.class.Formation} id="Formation" onClick={this.Select}>
-            Formation  
-        </button>
-        <button className = {this.state.class.ExpPro} id="ExpPro" onClick={this.Select}>
-            Expériences
-        </button>
-        <button className = {this.state.class.Apropos} id="Apropos" onClick={this.Select}>
-            À propos
-        </button>
-        <button className = {this.state.class.Competences} id="Competences" onClick={this.Select}>
-            Compétences
-        </button>
-        <button className ="NavBarBtn" id="Preview" onClick={this.Preview}>
-            Preview
-        </button>
-        <button id="Download">Download</button>
-    </div>
-        <InputFields field={this.state.field} save={this.save} 
-        saveAbout={this.saveAbout} add={this.add} data={this.state.data}
-        />
-    </div>
-    }
+                Competences : data.Competences,
+            })
+            e.target.reset();
+        }
+        
+        return (
+            <div className ="Builder">
+            {preview}
+            <div className ="NavBar">
+            <button className = {Class.InfoPerso} id="InfoPerso" onClick={Select}>
+                Infomations
+            </button>
+            <button className = {Class.Formation} id="Formation" onClick={Select}>
+                Formation  
+            </button>
+            <button className = {Class.ExpPro} id="ExpPro" onClick={Select}>
+                Expériences
+            </button>
+            <button className = {Class.Apropos} id="Apropos" onClick={Select}>
+                À propos
+            </button>
+            <button className = {Class.Competences} id="Competences" onClick={Select}>
+                Compétences
+            </button>
+            <button className ="NavBarBtn" id="Preview" onClick={Preview}>
+                Preview
+            </button>
+            <button id="Download">Download</button>
+        </div>
+            <InputFields field={field} save={save} 
+            saveAbout={saveAbout} add={add} data={data}
+            />
+        </div>
+        )
+        
 }
 
 export default Builder

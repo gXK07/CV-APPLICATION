@@ -1,20 +1,16 @@
 import React from "react";
+import { useState } from "react/cjs/react.development";
 import check from "../Images/check.png"
 import plus from '../Images/Plus.png'
 
 
-class InfoPers extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {}
-    };
-    render(){
-    if(this.props.etat){
+const InfoPers = (props) => {
+    if(props.etat){
         return <img src={check} alt="check"></img>
     }
     else{
     return <div className="InfoPers">
-        <form id="InfoPers" onSubmit={this.props.save}>
+        <form id="InfoPers" onSubmit={props.save}>
             <input placeholder ='Nom : Dupont'></input>
             <input placeholder ='Prenom : Julien'></input>
             <input placeholder ='Âge : 23 ans'></input>
@@ -27,18 +23,12 @@ class InfoPers extends React.Component{
     </div>
     }
 }
-}
 
-class Formation extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            top : ""
-        }
-    }
+const Formation = (props) => {
+    const [top, setTop] = useState("")
     // Sortir pour qu'on puisse le déclancher quand on clique sur "Formation" + quand on clique sur "+"
     // comme ca, ca résout le pb d'affichage manquant 
-    addTop = (array_Obj) => {
+    const addTop = (array_Obj) => {
         let to_Display = [];
         let arrayDivForma = []
         // On boucle sur les objets "Formation", "array_Obj.length" = nombre de formations
@@ -51,17 +41,14 @@ class Formation extends React.Component{
             arrayDivForma.push(divForma)
         }
         to_Display = arrayDivForma.map(x => <div className="forma">{x}</div>);
-        this.setState({
-            top : to_Display
-        });
+        setTop(to_Display);
     }
-    render(){
     return (
         <div>
-        <div>{this.state.top}</div>
+        <div>{top}</div>
         <form id="Formation" onSubmit={(e) => {
-            this.props.add(e, "Formation");
-            this.addTop(this.props.data);
+            props.add(e, "Formation");
+            addTop(props.data);
         }}>
             <input placeholder ='Etablissement'></input>
             <input placeholder ='Titre'></input>
@@ -72,8 +59,8 @@ class Formation extends React.Component{
     </form>
     </div>
     )
-    }
 }
+
 const Exp = (props) => {
     
     return (
